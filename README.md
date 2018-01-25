@@ -55,7 +55,7 @@ export class ContactFormComponent {
 | **type** | The type of the rendered input element | text, search, number, email, ... | text |
 | **name** | The name of the rendered input element | * ||
 | **id** | The id of the rendered input element | * ||
-| **required** | The required state of the rendered input element | true, false ||
+| **required** | The required state of the rendered input element | true, false | false |
 | **pattern** | Regular expression the value is checked against. Type must be text, search, tel, url, email, or password | true, false ||
 | **label** | The label for the input element | * ||
 
@@ -101,6 +101,6 @@ export class ContactFormComponent {
 |----------|-------------|-----------------|---------------|
 | **name** | The name of the rendered select element | * ||
 | **id** | The id of the rendered select element | * ||
-| **options** | The select elements options | SelectOptionInterface[] ||
-| **required** | The required state of the rendered select element | true, false ||
+| **options** | The select elements options | SelectOptionInterface[] | [] |
+| **required** | The required state of the rendered select element | true, false | false |
 | **label** | The label for the select element | * ||
