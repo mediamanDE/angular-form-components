@@ -7,7 +7,7 @@ import {
 @Component({
     selector: 'mm-input',
     template: `<div class="mm-input">
-                    <label [for]="name" class="mm-input__label" [innerHTML]="label"></label>
+                    <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
                     <input [type]="type"
                         [name]="name"
                         [id]="id"
