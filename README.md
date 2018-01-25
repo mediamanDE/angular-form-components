@@ -29,6 +29,8 @@ export class AppModule {
 
 ### Input field
 
+The `mm-input` component can represent all HTML input fields where a value can be entered.
+
 ```javascript
 import { Component } from '@angular/core';
 
@@ -44,3 +46,14 @@ export class ContactFormComponent {
     public name: string = '';
 }
 ```
+
+#### Properties
+
+| **name** | description | possible values | default value |
+|----------|-------------|-----------------|---------------|
+| **type** | The type of the rendered input element | text, search, number, email, ... | text |
+| **name** | The name of the rendered input element | * ||
+| **id** | The id of the rendered input element | * ||
+| **required** | The required state of the rendered input element | true, false ||
+| **pattern** | Regular expression the value is checked against. Type must be text, search, tel, url, email, or password | true, false ||
+| **label** | The label for the input element | * ||
