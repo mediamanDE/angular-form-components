@@ -1,73 +1,68 @@
-import { Component, Input, forwardRef, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input, forwardRef } from '@angular/core';
 import {
-    ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors,
-    NgModel, NG_VALIDATORS
+    NgModel, AbstractControl, ValidationErrors, ControlValueAccessor, Validator,
+    NG_VALUE_ACCESSOR, NG_VALIDATORS
 } from '@angular/forms';
+import { SelectOptionInterface } from './select-option.interface';
 
 @Component({
-    selector: 'mm-input',
-    template: `<div class="mm-input">
-                    <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
-                    <input [type]="type"
-                        [name]="name"
+    selector: 'mm-select',
+    template: `<div class="mm-select">
+                    <label [for]="name" class="mm-label mm-select__label" [innerHTML]="label"></label>
+                    <select [name]="name"
                         [id]="id"
                         [(ngModel)]="value"
                         [required]="required"
-                        [pattern]="pattern"
                         (change)="onChange()"
                         (blur)="onBlur()"
-                        class="mm-input__field">
+                        class="mm-select__field">
+                        <option *ngFor="let option of options" [ngValue]="option.value">{{ option.label }}</option>
+                    </select>
                 </div>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => InputComponent),
+            useExisting: forwardRef(() => SelectComponent),
             multi: true
         },
         {
             provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => InputComponent),
+            useExisting: forwardRef(() => SelectComponent),
             multi: true
         }
     ]
 })
-export class InputComponent implements ControlValueAccessor, Validator {
+export class SelectComponent implements ControlValueAccessor, Validator {
 
     /**
-     * The input name
+     * The selects name
      */
     @Input() public name: string;
 
     /**
-     * The input id
+     * The selects id
      */
     @Input() public id: string;
 
     /**
-     * The input type
+     * The selects options
      */
-    @Input() public type: string = 'text';
+    @Input() public options: SelectOptionInterface[] = [];
 
     /**
-     * The inputs required state
+     * The selects required state
      */
     @Input() public required: boolean = false;
 
     /**
-     * Regex for the input validation
-     * Need required set to true in order to take effect
-     */
-    @Input() public pattern: string = '';
-
-    /**
-     * The inputs label
+     * The selects label
      */
     @Input() public label: string;
 
     /**
-     * The input value
+     * The selected value
      */
-    public value: string|number;
+    public value: string = '';
 
     /**
      * Propagate the change event
@@ -80,14 +75,14 @@ export class InputComponent implements ControlValueAccessor, Validator {
     private propagateTouched: Function;
 
     /**
-     * The ngModel instance of the input element
+     * The ngModel instance of the select element
      */
-    @ViewChild(NgModel) private inputModel: NgModel;
+    @ViewChild(NgModel) private selectModel: NgModel;
 
     /**
      * @inheritDoc
      */
-    public writeValue(value: string|number) {
+    public writeValue(value: string) {
         this.value = value;
     }
 
@@ -109,11 +104,11 @@ export class InputComponent implements ControlValueAccessor, Validator {
      * @inheritDoc
      */
     public validate(c: AbstractControl): ValidationErrors|any {
-        if (!this.inputModel.touched) {
+        if (!this.selectModel.touched) {
             return undefined;
         }
 
-        return this.inputModel.errors;
+        return this.selectModel.errors;
     }
 
     /**
@@ -124,9 +119,10 @@ export class InputComponent implements ControlValueAccessor, Validator {
     }
 
     /**
-     * Mark the input as touched for the parent form
+     * Mark the select as touched for the parent form
      */
     public onBlur() {
         this.propagateTouched();
     }
 }
+
