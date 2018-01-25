@@ -40,7 +40,7 @@ import { Component } from '@angular/core';
                     [(ngModel)]="name"
                     [label]="'Your name'"></mm-input>`
 })
-export class ProductPageComponent {
+export class ContactFormComponent {
     public name: string = '';
 }
 ```
