@@ -104,3 +104,42 @@ export class ContactFormComponent {
 | **options** | The select elements options | SelectOptionInterface[] | [] |
 | **required** | The required state of the rendered select element | true, false | false |
 | **label** | The label for the select element | * ||
+
+### Radio button
+
+The `mm-radio` component represents a HTML radio button.
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'contact-form',
+    template: `
+        <mm-radio [name]="'contactPossibility'"
+            [id]="'contactPossibilityPhone'"
+            [value]="'phone'"
+            [required]="true"
+            [(ngModel)]="contactPossibility"
+            [label]="'Phone'"></mm-radio>
+        <mm-radio [name]="'contactPossibility'"
+            [id]="'contactPossibilityEmail'"
+            [value]="'email'"
+            [required]="true"
+            [(ngModel)]="contactPossibility"
+            [label]="'E-Mail'"></mm-radio>
+    `
+})
+export class ContactFormComponent {
+    public contactPossibility: string = '';
+}
+```
+
+#### Properties
+
+| **name** | description | possible values | default value |
+|----------|-------------|-----------------|---------------|
+| **name** | The name of the rendered radio button element | * ||
+| **id** | The id of the rendered radio button element | * ||
+| **value** | The value of the rendered datio button element | * ||
+| **required** | The required state of the rendered radio button element | true, false | false |
+| **label** | The label for the radio button element | * ||
