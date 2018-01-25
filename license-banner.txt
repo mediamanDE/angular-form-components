@@ -1,0 +1,4 @@
+/**
+ * @license angular-form-components
+ * MIT license
+ */
