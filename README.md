@@ -3,6 +3,7 @@
 > Angular library of common, un-styled form components.
 
 [![Build Status](https://travis-ci.org/mediamanDE/angular-form-components.svg?branch=master)](https://travis-ci.org/mediamanDE/angular-form-components)
+[![npm version](https://badge.fury.io/js/%40mediaman%2Fangular-form-components.svg)](https://badge.fury.io/js/%40mediaman%2Fangular-form-components)
 
 ## Installation
 
