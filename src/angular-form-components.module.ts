@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { SelectComponent } from './select/select.component';
 import { CommonModule } from '@angular/common';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
+import { RadioButtonGroupComponent } from './radio-button/radio-button-group.component';
 
 @NgModule({
     declarations: [
         InputComponent,
         SelectComponent,
-        RadioButtonComponent
+        RadioButtonComponent,
+        RadioButtonGroupComponent
     ],
     imports: [
         FormsModule,
@@ -18,7 +20,8 @@ import { RadioButtonComponent } from './radio-button/radio-button.component';
     exports: [
         InputComponent,
         SelectComponent,
-        RadioButtonComponent
+        RadioButtonComponent,
+        RadioButtonGroupComponent
     ]
 })
 export class AngularFormComponentsModule {

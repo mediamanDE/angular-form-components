@@ -1,8 +1,14 @@
-import { Component, forwardRef, ViewChild, Input } from '@angular/core';
+import { Component, forwardRef, ViewChild, Input, Inject, Optional, OnInit } from '@angular/core';
 import {
-    Validator, ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS, ValidationErrors,
-    AbstractControl, NgModel
+    Validator,
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    ValidationErrors,
+    AbstractControl,
+    NgModel
 } from '@angular/forms';
+import { RadioButtonGroupComponent } from './radio-button-group.component';
 
 @Component({
     selector: 'mm-radio-button',
@@ -13,6 +19,7 @@ import {
                         [id]="id"
                         [value]="value"
                         [(ngModel)]="model"
+                        [checked]="checked"
                         [required]="required"
                         (change)="onChange()"
                         (blur)="onBlur()"
@@ -31,7 +38,7 @@ import {
         }
     ]
 })
-export class RadioButtonComponent implements ControlValueAccessor, Validator {
+export class RadioButtonComponent implements OnInit, ControlValueAccessor, Validator {
 
     /**
      * The radio buttons name
@@ -50,8 +57,18 @@ export class RadioButtonComponent implements ControlValueAccessor, Validator {
 
     /**
      * The radio buttons required state
+     * Get the parent radio button groups required state if
+     * the internal required state is false and the parent
+     * radio button group exists.
      */
-    @Input() public required: boolean = false;
+    @Input()
+    public get required(): boolean {
+        return (this._required || this.radioButtonGroup && this.radioButtonGroup.required);
+    }
+
+    public set required(value: boolean) {
+        this._required = value;
+    }
 
     /**
      * The radio buttons label
@@ -61,7 +78,20 @@ export class RadioButtonComponent implements ControlValueAccessor, Validator {
     /**
      * The radio buttons ngModel
      */
-    public model: string;
+    public get model(): string {
+        return this._model;
+    }
+
+    public set model(value: string) {
+        this._model = value;
+
+        this.checked = (this.model === this.value);
+    }
+
+    /**
+     * The radio buttons checked state
+     */
+    public checked: boolean = false;
 
     /**
      * Propagate the change event
@@ -77,6 +107,36 @@ export class RadioButtonComponent implements ControlValueAccessor, Validator {
      * The ngModel instance of the radio button element
      */
     @ViewChild(NgModel) private radioButtonModel: NgModel;
+
+    /**
+     * The internal required state
+     * Gets read and set by TS getter/setters
+     */
+    private _model: string;
+
+    /**
+     * The internal required state
+     * Gets read and set by TS getter/setters
+     */
+    private _required: boolean = false;
+
+    /**
+     * @param [radioButtonGroup] - The parent radio button group
+     */
+    public constructor(@Optional() @Inject(forwardRef(() => RadioButtonGroupComponent))
+                       private radioButtonGroup: RadioButtonGroupComponent) {
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public ngOnInit() {
+
+        // Try to apply the parent radio button groups properties
+        if (this.radioButtonGroup) {
+            this.name = this.radioButtonGroup.name;
+        }
+    }
 
     /**
      * @inheritDoc
@@ -114,6 +174,13 @@ export class RadioButtonComponent implements ControlValueAccessor, Validator {
      * Propagates the changes to the parent form
      */
     public onChange() {
+        if (this.radioButtonGroup) {
+            this.radioButtonGroup.value = this.value;
+        }
+
+        if (!this.propagateChange) {
+            return;
+        }
         this.propagateChange(this.value);
     }
 
@@ -121,6 +188,9 @@ export class RadioButtonComponent implements ControlValueAccessor, Validator {
      * Mark the radio button as touched for the parent form
      */
     public onBlur() {
+        if (!this.propagateTouched) {
+            return;
+        }
         this.propagateTouched();
     }
 }

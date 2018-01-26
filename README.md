@@ -109,24 +109,22 @@ export class ContactFormComponent {
 
 The `mm-radio` component represents a HTML radio button.
 
+The `mm-radio` component should be used, if possible, in combination with the `mm-radio-group` component.
+
 ```javascript
 import { Component } from '@angular/core';
 
 @Component({
     selector: 'contact-form',
     template: `
-        <mm-radio [name]="'contactPossibility'"
-            [id]="'contactPossibilityPhone'"
-            [value]="'phone'"
-            [required]="true"
-            [(ngModel)]="contactPossibility"
-            [label]="'Phone'"></mm-radio>
-        <mm-radio [name]="'contactPossibility'"
-            [id]="'contactPossibilityEmail'"
-            [value]="'email'"
-            [required]="true"
-            [(ngModel)]="contactPossibility"
-            [label]="'E-Mail'"></mm-radio>
+        <mm-radio-group [name]="'contactPossibility'" [required]="true" [(ngModel)]="contactPossibility">
+            <mm-radio [id]="'contactPossibilityPhone'"
+                [value]="'phone'"
+                [label]="'Phone'"></mm-radio>
+            <mm-radio [id]="'contactPossibilityEmail'"
+                [value]="'email'"
+                [label]="'E-Mail'"></mm-radio>
+        </mm-radio-group>
     `
 })
 export class ContactFormComponent {
