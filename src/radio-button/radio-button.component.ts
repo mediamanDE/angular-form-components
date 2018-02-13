@@ -13,7 +13,6 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
 @Component({
     selector: 'mm-radio-button',
     template: `<div class="mm-radiobutton">
-                    <label [for]="id" class="mm-label mm-radiobutton__label" [innerHTML]="label"></label>
                     <input [type]="'radio'"
                         [attr.name]="name"
                         [id]="id"
@@ -24,6 +23,7 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
                         (change)="onChange()"
                         (blur)="onBlur()"
                         class="mm-radiobutton__field">
+                    <label [for]="id" class="mm-label mm-radiobutton__label" [innerHTML]="label"></label>
                 </div>`,
     providers: [
         {

@@ -1,13 +1,17 @@
 import { Component, QueryList, ContentChildren, Input, forwardRef } from '@angular/core';
 import {
-    Validator, AbstractControl, ValidationErrors, ControlValueAccessor, NG_VALUE_ACCESSOR,
+    Validator,
+    AbstractControl,
+    ValidationErrors,
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
     NG_VALIDATORS
 } from '@angular/forms';
 import { RadioButtonComponent } from './radio-button.component';
 
 @Component({
     selector: 'mm-radio-button-group',
-    template: `<ng-content></ng-content>`,
+    template: `<div class="mm-radiobutton-group"><ng-content></ng-content></div>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
