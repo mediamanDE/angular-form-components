@@ -118,12 +118,12 @@ import { Component } from '@angular/core';
     selector: 'contact-form',
     template: `
         <mm-radio-group [name]="'contactPossibility'" [required]="true" [(ngModel)]="contactPossibility">
-            <mm-radio [id]="'contactPossibilityPhone'"
+            <mm-radio-button [id]="'contactPossibilityPhone'"
                 [value]="'phone'"
-                [label]="'Phone'"></mm-radio>
-            <mm-radio [id]="'contactPossibilityEmail'"
+                [label]="'Phone'"></mm-radio-button>
+            <mm-radio-button [id]="'contactPossibilityEmail'"
                 [value]="'email'"
-                [label]="'E-Mail'"></mm-radio>
+                [label]="'E-Mail'"></mm-radio-button>
         </mm-radio-group>
     `
 })

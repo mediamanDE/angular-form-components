@@ -118,6 +118,10 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
      * @inheritDoc
      */
     public validate(c: AbstractControl): ValidationErrors|any {
+        if (!this.radioButtons) {
+            return undefined;
+        }
+
         const checkedRadioButtons = this.radioButtons.find((radioButton: RadioButtonComponent) => radioButton.checked);
         if (!checkedRadioButtons) {
             return {required: true};
