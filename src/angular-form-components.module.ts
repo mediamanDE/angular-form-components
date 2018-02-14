@@ -5,13 +5,15 @@ import { SelectComponent } from './select/select.component';
 import { CommonModule } from '@angular/common';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
 import { RadioButtonGroupComponent } from './radio-button/radio-button-group.component';
+import { ToggleComponent } from './toggle/toggle.component';
 
 @NgModule({
     declarations: [
         InputComponent,
         SelectComponent,
         RadioButtonComponent,
-        RadioButtonGroupComponent
+        RadioButtonGroupComponent,
+        ToggleComponent
     ],
     imports: [
         FormsModule,
@@ -21,7 +23,8 @@ import { RadioButtonGroupComponent } from './radio-button/radio-button-group.com
         InputComponent,
         SelectComponent,
         RadioButtonComponent,
-        RadioButtonGroupComponent
+        RadioButtonGroupComponent,
+        ToggleComponent
     ]
 })
 export class AngularFormComponentsModule {
