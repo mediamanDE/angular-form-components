@@ -33,6 +33,6 @@
         "annotateForClosureCompiler": true,
         "strictMetadataEmit": true,
         "flatModuleOutFile": "angular-form-components.js",
-        "flatModuleId": "angular-form-components"
+        "flatModuleId": "@mediaman/angular-form-components"
     }
 }
