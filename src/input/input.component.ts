@@ -1,12 +1,18 @@
 import { Component, Input, forwardRef, ViewChild } from '@angular/core';
 import {
-    ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors,
-    NgModel, NG_VALIDATORS
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    Validator,
+    AbstractControl,
+    ValidationErrors,
+    NgModel,
+    NG_VALIDATORS
 } from '@angular/forms';
+import { AbstractFormControl } from '../abtract-form-control';
 
 @Component({
     selector: 'mm-input',
-    template: `<div class="mm-input">
+    template: `<div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}">
                     <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
                     <input [type]="type"
                         [name]="name"
@@ -17,6 +23,9 @@ import {
                         (change)="onChange()"
                         (blur)="onBlur()"
                         class="mm-input__field">
+                    <span class="mm-input__error"
+                        *ngIf="control && control.touched && !control.valid"
+                        [innerHTML]="errorMessage"></span>
                 </div>`,
     providers: [
         {
@@ -31,7 +40,7 @@ import {
         }
     ]
 })
-export class InputComponent implements ControlValueAccessor, Validator {
+export class InputComponent extends AbstractFormControl implements ControlValueAccessor, Validator {
 
     /**
      * The input name
@@ -63,6 +72,11 @@ export class InputComponent implements ControlValueAccessor, Validator {
      * The inputs label
      */
     @Input() public label: string;
+
+    /**
+     * The inputs error message
+     */
+    @Input() public errorMessage: string = 'Bitte überprüfen Sie Ihre Eingabe.';
 
     /**
      * The input value
