@@ -38,7 +38,7 @@ describe('ToggleComponent', () => {
     });
 
     describe('::validate', () => {
-        it('should proxy the input errors', () => {
+        it('should validate the checked state', () => {
             component.required = true;
 
             let errors = component.validate(new FormControl());
@@ -47,6 +47,12 @@ describe('ToggleComponent', () => {
 
             component.model = true;
             errors = component.validate(new FormControl());
+
+            expect(errors).toBeUndefined();
+        });
+
+        it('should not validate if it is not required', () => {
+            const errors = component.validate(new FormControl());
 
             expect(errors).toBeUndefined();
         });

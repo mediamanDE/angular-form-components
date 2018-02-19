@@ -123,7 +123,7 @@ export class ToggleComponent implements ControlValueAccessor, Validator {
      * @inheritDoc
      */
     public validate(c: AbstractControl): ValidationErrors|any {
-        if (!this.model) {
+        if (this.required && !this.model) {
             return {required: true};
         }
 
