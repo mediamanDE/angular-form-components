@@ -1,7 +1,11 @@
-import { Component, forwardRef, Input, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import {
-    NG_VALUE_ACCESSOR, NG_VALIDATORS, ControlValueAccessor, Validator, AbstractControl,
-    ValidationErrors, NgModel
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    ControlValueAccessor,
+    Validator,
+    AbstractControl,
+    ValidationErrors
 } from '@angular/forms';
 
 @Component({
@@ -85,11 +89,6 @@ export class ToggleComponent implements ControlValueAccessor, Validator {
     public model: boolean;
 
     /**
-     * The ngModel instance of the input element
-     */
-    @ViewChild(NgModel) private inputModel: NgModel;
-
-    /**
      * Propagate the change event
      */
     private propagateChange: Function;
@@ -124,11 +123,11 @@ export class ToggleComponent implements ControlValueAccessor, Validator {
      * @inheritDoc
      */
     public validate(c: AbstractControl): ValidationErrors|any {
-        if (!this.inputModel.touched) {
-            return undefined;
+        if (!this.model) {
+            return {required: true};
         }
 
-        return this.inputModel.errors;
+        return undefined;
     }
 
     /**

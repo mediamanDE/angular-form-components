@@ -1,6 +1,6 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { InputComponent } from '../../src/input/input.component';
-import { FormsModule, NgModel, FormControl } from '@angular/forms';
+import { FormsModule, NgModel, FormControl, ControlContainer } from '@angular/forms';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
@@ -15,7 +15,10 @@ describe('InputComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [InputComponent],
-            imports: [FormsModule]
+            imports: [FormsModule],
+            providers: [
+                {provide: ControlContainer, useValue: {control: {get: () => new FormControl()}}}
+            ]
         });
     });
     

@@ -41,20 +41,12 @@ describe('ToggleComponent', () => {
         it('should proxy the input errors', () => {
             component.required = true;
 
-            fixture.detectChanges();
-            inputModel.control.markAsTouched();
-
-            const errors = component.validate(new FormControl());
+            let errors = component.validate(new FormControl());
 
             expect(errors).toEqual({required: true});
-        });
 
-        it('should perform no validation if the input was never touched', () => {
-            component.required = true;
-
-            fixture.detectChanges();
-
-            const errors = component.validate(new FormControl());
+            component.model = true;
+            errors = component.validate(new FormControl());
 
             expect(errors).toBeUndefined();
         });
