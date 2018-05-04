@@ -8,14 +8,14 @@ export class XsrfInterceptor implements HttpInterceptor {
     /**
      * @param tokenExtractor
      */
-    constructor(private tokenExtractor: HttpXsrfTokenExtractor) {
+    public constructor(private tokenExtractor: HttpXsrfTokenExtractor) {
     }
 
     /**
      * @param req
      * @param next
      */
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let requestToForward = req;
 
         // Do nothing if the requested URL is on a different host
