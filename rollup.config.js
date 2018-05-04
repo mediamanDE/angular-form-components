@@ -47,8 +47,11 @@ const globals = {
     'rxjs/Observable': 'Rx',
     'rxjs/Observer': 'Rx',
     'rxjs/operator/map': 'Rx.Operator',
+    'rxjs/operator/concatMap': 'Rx.Observable',
+    'rxjs/operator/filter': 'Rx.Observable',
     'rxjs/observable/forkJoin': 'Rx.Observable',
-    'rxjs/observable/fromPromise': 'Rx.Observable'
+    'rxjs/observable/fromPromise': 'Rx.Observable',
+    'rxjs/observable/of': 'Rx.Observable'
 };
 
 export default {
