@@ -26,6 +26,21 @@ export class AppModule {
 }
 ```
 
+### Enabling XSRF support
+
+You can enable xsrf support to protect your form API agains cross domain forgery by providing an API endpoint to set the XSRF token.
+
+```javascript
+import { NgModule } from '@angular/core';
+import { AngularFormComponentsModule } from '@mediaman/angular-form-components';
+
+@NgModule({
+    imports: [AngularFormComponentsModule.forRoot({xsrfApiUrl: 'http://example.com/api/v1/csrf'})]
+});
+export class AppModule {
+}
+```
+
 ## Components
 
 ### Input field

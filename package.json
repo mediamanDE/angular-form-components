@@ -1,6 +1,6 @@
 {
     "name": "@mediaman/angular-form-components",
-    "version": "0.0.8",
+    "version": "1.0.0",
     "description": "Angular library of common, un-styled form components.",
     "main": "./bundles/angular-form-components.umd.js",
     "module": "./esm5/angular-form-components.js",
@@ -65,7 +65,7 @@
         "marked": "0.3.9",
         "reflect-metadata": "0.1.10",
         "rollup": "0.50.0",
-        "rollup-plugin-license": "0.5.0",
+        "rollup-plugin-license": "0.6.0",
         "rollup-plugin-node-resolve": "3.0.0",
         "rollup-plugin-sourcemaps": "0.4.2",
         "rxjs": "5.5.2",
