@@ -1,30 +1,31 @@
-import { Component, forwardRef, ViewChild, Input, Inject, Optional, OnInit } from '@angular/core';
+import { Component, forwardRef, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import {
-    Validator,
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-    NG_VALIDATORS,
-    ValidationErrors,
     AbstractControl,
-    NgModel
+    ControlValueAccessor,
+    NG_VALIDATORS,
+    NG_VALUE_ACCESSOR,
+    NgModel,
+    ValidationErrors,
+    Validator
 } from '@angular/forms';
 import { RadioButtonGroupComponent } from './radio-button-group.component';
 
 @Component({
     selector: 'mm-radio-button',
-    template: `<div class="mm-radiobutton">
-                    <input [type]="'radio'"
-                        [attr.name]="name"
-                        [id]="id"
-                        [value]="value"
-                        [(ngModel)]="model"
-                        [checked]="checked"
-                        [required]="required"
-                        (change)="onChange()"
-                        (blur)="onBlur()"
-                        class="mm-radiobutton__field">
-                    <label [for]="id" class="mm-label mm-radiobutton__label" [innerHTML]="label"></label>
-                </div>`,
+    template: `
+        <div class="mm-radiobutton">
+            <input [type]="'radio'"
+                   [attr.name]="name"
+                   [id]="id"
+                   [value]="value"
+                   [(ngModel)]="model"
+                   [checked]="checked"
+                   [required]="required"
+                   (change)="onChange()"
+                   (blur)="onBlur()"
+                   class="mm-radiobutton__field">
+            <label [for]="id" class="mm-label mm-radiobutton__label" [innerHTML]="label"></label>
+        </div>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -91,7 +92,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor, Valid
     /**
      * The radio buttons checked state
      */
-    public checked: boolean = false;
+    @Input() public checked: boolean = false;
 
     /**
      * Propagate the change event
@@ -162,7 +163,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor, Valid
     /**
      * @inheritDoc
      */
-    public validate(c: AbstractControl): ValidationErrors|any {
+    public validate(c: AbstractControl): ValidationErrors | any {
         if (!this.radioButtonModel.touched) {
             return undefined;
         }
