@@ -1,5 +1,5 @@
-import { AbstractControl, ControlContainer } from '@angular/forms';
-import { ChangeDetectorRef, OnInit, Inject } from '@angular/core';
+import { AbstractControl, ControlContainer, FormGroup, NgForm } from '@angular/forms';
+import { ChangeDetectorRef, Inject, OnInit } from '@angular/core';
 
 export abstract class AbstractFormControl implements OnInit {
 
@@ -26,7 +26,10 @@ export abstract class AbstractFormControl implements OnInit {
      */
     public ngOnInit() {
         setTimeout(() => {
-            this.control = (this.controlContainer.control as AbstractControl).get(this.name) as AbstractControl;
+
+            // We have to use this weird way to support deep-nested components, using model groups
+            this.control = ((this.controlContainer as NgForm).controls.value as FormGroup)
+                .get(this.name) as AbstractControl;
             this.control.valueChanges.subscribe(() => this.changeDetectorRef.markForCheck());
         });
     }

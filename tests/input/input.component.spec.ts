@@ -1,14 +1,11 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InputComponent } from '../../src/input/input.component';
-import { FormsModule, NgModel, FormControl, ControlContainer } from '@angular/forms';
-import { DebugElement } from '@angular/core';
+import { ControlContainer, FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 describe('InputComponent', () => {
     let fixture: ComponentFixture<InputComponent>;
     let component: InputComponent;
-    let inputElement: DebugElement;
-    let inputModel: NgModel;
     let propagateChangeFn: Function;
     let propagateTouchedFn: Function;
 
@@ -17,41 +14,49 @@ describe('InputComponent', () => {
             declarations: [InputComponent],
             imports: [FormsModule],
             providers: [
-                {provide: ControlContainer, useValue: {control: {get: () => new FormControl()}}}
+                {provide: ControlContainer, useValue: {controls: {value: {get: () => new FormControl()}}}},
+                NgForm
             ]
         });
     });
-    
+
     beforeEach(() => {
         fixture = TestBed.createComponent(InputComponent);
         component = fixture.componentInstance;
-        inputElement = fixture.debugElement.query(By.css('input'));
-        inputModel = inputElement.injector.get(NgModel);
+
 
         propagateChangeFn = jasmine.createSpy('propagateChangeFn');
         propagateTouchedFn = jasmine.createSpy('propagateTouchedFn');
+
+        component.name = 'fistName';
     });
 
     describe('::writeValue', () => {
-       it('should set the internal value', () => {
-           const newValue = 'foo';
+        it('should set the internal value', () => {
+            const newValue = 'foo';
 
-           component.writeValue(newValue);
+            component.writeValue(newValue);
 
-           expect(component.value).toBe(newValue);
-       });
+            expect(component.value).toBe(newValue);
+        });
     });
 
     describe('::validate', () => {
-        it('should proxy the input errors', () => {
+        it('should proxy the input errors', (done) => {
             component.required = true;
 
             fixture.detectChanges();
-            inputModel.control.markAsTouched();
+            fixture.whenStable().then(() => {
+                const inputElement = fixture.debugElement.query(By.directive(NgModel));
+                const inputModel = inputElement.injector.get(NgModel);
 
-            const errors = component.validate(new FormControl());
+                inputModel.control.markAsTouched();
 
-            expect(errors).toEqual({required: true});
+                const errors = component.validate(new FormControl());
+
+                expect(errors).toEqual({required: true});
+                done();
+            });
         });
 
         it('should perform no validation if the input was never touched', () => {
@@ -76,6 +81,15 @@ describe('InputComponent', () => {
 
             expect(propagateChangeFn).toHaveBeenCalledWith(newValue);
         });
+
+        it('should not propagate the change to the parent form if there is no handler', () => {
+            const newValue = 'foo';
+
+            component.writeValue(newValue);
+            component.onChange();
+
+            expect(propagateChangeFn).not.toHaveBeenCalled();
+        });
     });
 
     describe('::onBlur', () => {
@@ -85,6 +99,12 @@ describe('InputComponent', () => {
             component.onBlur();
 
             expect(propagateTouchedFn).toHaveBeenCalled();
+        });
+
+        it('should not mark the input as touched for the parent form if there is no handler', () => {
+            component.onBlur();
+
+            expect(propagateTouchedFn).not.toHaveBeenCalled();
         });
     });
 });
