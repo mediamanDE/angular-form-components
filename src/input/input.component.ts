@@ -1,32 +1,35 @@
-import { Component, Input, forwardRef, ViewChild } from '@angular/core';
+import { Component, forwardRef, Input, ViewChild } from '@angular/core';
 import {
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-    Validator,
     AbstractControl,
-    ValidationErrors,
+    ControlContainer,
+    ControlValueAccessor,
+    NG_VALIDATORS,
+    NG_VALUE_ACCESSOR,
+    NgForm,
     NgModel,
-    NG_VALIDATORS
+    ValidationErrors,
+    Validator
 } from '@angular/forms';
 import { AbstractFormControl } from '../abtract-form-control';
 
 @Component({
     selector: 'mm-input',
-    template: `<div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}">
-                    <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
-                    <input [type]="type"
-                        [name]="name"
-                        [id]="id"
-                        [(ngModel)]="value"
-                        [required]="required"
-                        [pattern]="pattern"
-                        (change)="onChange()"
-                        (blur)="onBlur()"
-                        class="mm-input__field">
-                    <span class="mm-input__error"
-                        *ngIf="control && control.touched && !control.valid"
-                        [innerHTML]="errorMessage"></span>
-                </div>`,
+    template: `
+        <div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}" ngModelGroup="value">
+            <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
+            <input [type]="type"
+                   [name]="name"
+                   [id]="id"
+                   [(ngModel)]="value"
+                   [required]="required"
+                   [pattern]="pattern"
+                   (change)="onChange()"
+                   (blur)="onBlur()"
+                   class="mm-input__field">
+            <span class="mm-input__error"
+                  *ngIf="control && control.touched && !control.valid"
+                  [innerHTML]="errorMessage"></span>
+        </div>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -38,7 +41,8 @@ import { AbstractFormControl } from '../abtract-form-control';
             useExisting: forwardRef(() => InputComponent),
             multi: true
         }
-    ]
+    ],
+    viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
 })
 export class InputComponent extends AbstractFormControl implements ControlValueAccessor, Validator {
 
@@ -81,7 +85,7 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
     /**
      * The input value
      */
-    public value: string|number;
+    public value: string | number;
 
     /**
      * Propagate the change event
@@ -101,7 +105,7 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
     /**
      * @inheritDoc
      */
-    public writeValue(value: string|number) {
+    public writeValue(value: string | number) {
         this.value = value;
     }
 
@@ -122,7 +126,7 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
     /**
      * @inheritDoc
      */
-    public validate(c: AbstractControl): ValidationErrors|any {
+    public validate(c: AbstractControl): ValidationErrors | any {
         if (!this.inputModel.touched) {
             return undefined;
         }
@@ -134,13 +138,17 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
      * Propagates the changes to the parent form
      */
     public onChange() {
-        this.propagateChange(this.value);
+        if (this.propagateChange) {
+            this.propagateChange(this.value);
+        }
     }
 
     /**
      * Mark the input as touched for the parent form
      */
     public onBlur() {
-        this.propagateTouched();
+        if (this.propagateTouched) {
+            this.propagateTouched();
+        }
     }
 }

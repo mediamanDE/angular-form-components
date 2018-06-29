@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders, APP_INITIALIZER } from '@angular/core';
 import { InputComponent } from './input/input.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { SelectComponent } from './select/select.component';
 import { CommonModule } from '@angular/common';
 import { RadioButtonComponent } from './radio-button/radio-button.component';
@@ -41,7 +41,8 @@ export function initApp(appLoadService: XsrfAppLoadService) {
         RadioButtonComponent,
         RadioButtonGroupComponent,
         ToggleComponent
-    ]
+    ],
+    providers: [NgForm]
 })
 export class AngularFormComponentsModule {
     public static forRoot(config: any): ModuleWithProviders {

@@ -1,7 +1,7 @@
 import { TestBed, ComponentFixture, inject } from '@angular/core/testing';
 import { AbstractFormControl } from '../src/abtract-form-control';
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { ControlContainer, FormControl, AbstractControl } from '@angular/forms';
+import { ControlContainer, FormControl, AbstractControl, NgForm, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'test-component',
@@ -15,13 +15,14 @@ describe('AbstractFormControl', () => {
     let fixture: ComponentFixture<ConcreteFormControlComponent>;
     let component: AbstractFormControl;
     let controlContainer: ControlContainer;
+    let formGroup: FormGroup;
     let formControl: FormControl;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [ConcreteFormControlComponent],
             providers: [
-                {provide: ControlContainer, useValue: {control: {get: () => null}}}
+                {provide: ControlContainer, useValue: {controls: {value: {get: () => null}}}}
             ]
         });
     });
@@ -31,9 +32,10 @@ describe('AbstractFormControl', () => {
         component = fixture.componentInstance;
         controlContainer = _controlContainer;
 
+        formGroup = (controlContainer as NgForm).controls.value as FormGroup;
         formControl = new FormControl();
 
-        spyOn((controlContainer.control as AbstractControl), 'get').and.returnValue(formControl);
+        spyOn(formGroup, 'get').and.returnValue(formControl);
     }));
 
     describe('::ngOnInit', () => {
@@ -41,7 +43,7 @@ describe('AbstractFormControl', () => {
             component.ngOnInit();
 
             setTimeout(() => {
-                expect((controlContainer.control as AbstractControl).get).toHaveBeenCalledWith(component.name);
+                expect(formGroup.get).toHaveBeenCalledWith(component.name);
                 expect(component.control).toBe(formControl);
 
                 done();
