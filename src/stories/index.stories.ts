@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/angular';
 import { withInfo } from '@storybook/addon-info';
-import { withNotes } from '@storybook/addon-notes';
+import { withMarkdownNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
@@ -10,34 +10,72 @@ import { InputComponent } from '../input/input.component';
 import { SelectComponent } from '../select/select.component';
 import { ToggleComponent } from '../toggle/toggle.component';
 
-storiesOf('Generic Form Components', module)
-    .add('InputComponent', () => ({
+storiesOf('Input', module)
+    .add('Basic', withMarkdownNotes(`
+# Hello World
+
+This is some code showing usage of the component and other inline documentation
+
+~~~js
+<div>
+  hello world!
+  <Component/>
+</div>
+~~~
+    `)(() => ({
         component: InputComponent,
-        props: {},
-    }))
-    .add('RadioButtonComponent', () => ({
+        props: {
+            label: 'Text Input Label',
+            value: 'hi ho',
+            errorMessage: 'This is an error message'
+        },
+    })))
+
+storiesOf('Radio Button', module)
+    .add('Basic Unchecked', withMarkdownNotes(`
+# Hello World
+
+This is some code showing usage of the component and other inline documentation
+
+~~~js
+<div>
+  hello world!
+  <Component/>
+</div>
+~~~
+    `)(() => ({
         component: RadioButtonComponent,
         props: {
-            label: 'radio button label'
+            label: 'Radio Button Label'
         },
-    }))
-    .add('RadioButtonComponent checked required', () => ({
+    })))
+    .add('Checked Required', () => ({
         component: RadioButtonComponent,
         props: {
             checked: 'checked',
-            label: 'radio button label',
+            label: 'Radio Button Label',
             required: true
         },
     }))
-    .add('RadioButtonGroupComponent', () => ({
+
+storiesOf('Radio Button Group', module)
+    .add('Basic', () => ({
         component: RadioButtonGroupComponent,
         props: {},
     }))
-    .add('SelectComponent', () => ({
+
+storiesOf('Select', module)
+    .add('Basic', () => ({
         component: SelectComponent,
-        props: {},
+        props: {
+            label: 'Select Label',
+            options: [{ value: '1', label: 'option 1'}, { value: '2', label: 'option 2'}]
+        },
     }))
-    .add('ToggleComponent', () => ({
+
+
+storiesOf('Toggle', module)
+    .add('Basic', () => ({
         component: ToggleComponent,
         props: {},
     }));
