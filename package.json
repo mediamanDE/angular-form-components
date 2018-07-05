@@ -14,7 +14,7 @@
         "compodoc": "compodoc -p tsconfig.json",
         "compodoc:serve": "compodoc -s",
         "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook -o docs"
+        "build-storybook": "build-storybook -o docs && storybook2json --stories src/stories --out docs/components.json"
     },
     "typings": "./angular-form-components.d.ts",
     "author": "",
@@ -35,6 +35,7 @@
     "dependencies": {
         "@angular-devkit/core": "^0.6.8",
         "@angular/forms": "^6.0.3",
+        "@mediaman/storybook-to-json": "^0.1.0",
         "tslib": "^1.7.1"
     },
     "peerDependencies": {
