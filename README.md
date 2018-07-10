@@ -132,14 +132,16 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'contact-form',
     template: `
-        <mm-radio-group [name]="'contactPossibility'" [required]="true" [(ngModel)]="contactPossibility">
+        <mm-radio-button-group [name]="'contactPossibility'"
+            [required]="true"
+            [(ngModel)]="contactPossibility">
             <mm-radio-button [id]="'contactPossibilityPhone'"
                 [value]="'phone'"
                 [label]="'Phone'"></mm-radio-button>
             <mm-radio-button [id]="'contactPossibilityEmail'"
                 [value]="'email'"
                 [label]="'E-Mail'"></mm-radio-button>
-        </mm-radio-group>
+        </mm-radio-button-group>
     `
 })
 export class ContactFormComponent {

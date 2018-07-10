@@ -6,9 +6,9 @@ import { RadioButtonComponent } from '../radio-button/radio-button.component';
 const documentationBasic = `
 ### Radio button
 
-The \`mm-radio\` component represents a HTML radio button.
+The \`mm-radio-button\` component represents a HTML radio button.
 
-The \`mm-radio\` component should be used, if possible, in combination with the \`mm-radio-group\` component.
+The \`mm-radio-button\` component should be used, if possible, in combination with the \`mm-radio-button-group\` component.
 
 ~~~js
 import { Component } from '@angular/core';
@@ -16,14 +16,16 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'contact-form',
     template: \`
-        <mm-radio-group [name]="'contactPossibility'" [required]="true" [(ngModel)]="contactPossibility">
+        <mm-radio-button-group [name]="'contactPossibility'"
+            [required]="true"
+            [(ngModel)]="contactPossibility">
             <mm-radio-button [id]="'contactPossibilityPhone'"
                 [value]="'phone'"
                 [label]="'Phone'"></mm-radio-button>
             <mm-radio-button [id]="'contactPossibilityEmail'"
                 [value]="'email'"
                 [label]="'E-Mail'"></mm-radio-button>
-        </mm-radio-group>
+        </mm-radio-button-group>
     \`
 })
 export class ContactFormComponent {
