@@ -12,7 +12,9 @@
         "publish:lib": "npm run build && npm publish --access public ./dist",
         "publish:lib:next": "npm run build && npm publish --tag next ./dist",
         "compodoc": "compodoc -p tsconfig.json",
-        "compodoc:serve": "compodoc -s"
+        "compodoc:serve": "compodoc -s",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook -o docs && storybook2json --stories src/stories --out docs/components.json"
     },
     "typings": "./angular-form-components.d.ts",
     "author": "",
@@ -47,9 +49,17 @@
         "@angular/platform-browser": "^6.0.3",
         "@angular/platform-browser-dynamic": "^6.0.3",
         "@angular/platform-server": "^6.0.3",
+        "@angular-devkit/core": "^0.6.8",
         "@compodoc/compodoc": "1.0.3",
+        "@mediaman/storybook-to-json": "^0.1.0",
+        "@storybook/addon-actions": "^4.0.0-alpha.10",
+        "@storybook/addon-notes": "^4.0.0-alpha.10",
+        "@storybook/addon-options": "^3.4.8",
+        "@storybook/addons": "^4.0.0-alpha.10",
+        "@storybook/angular": "^4.0.0-alpha.10",
         "@types/jasmine": "2.6.2",
         "@types/node": "8.0.47",
+        "babel-core": "^6.26.3",
         "chalk": "2.3.0",
         "codelyzer": "4.0.2",
         "core-js": "2.5.1",
@@ -71,12 +81,12 @@
         "rxjs": "^6.0.0",
         "shelljs": "0.7.8",
         "source-map-loader": "0.2.3",
-        "ts-loader": "3.1.1",
+        "ts-loader": "^4.4.2",
         "tslint": "~5.9.1",
         "tslint-angular": "1.0.0",
         "typescript": "~2.7.2",
         "uglify-js": "3.1.6",
-        "webpack": "3.8.1",
+        "webpack": "^4.13.0",
         "zone.js": "^0.8.26"
     }
 }
