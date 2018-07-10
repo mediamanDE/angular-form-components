@@ -1,11 +1,9 @@
 import { storiesOf } from '@storybook/angular';
-import { withMarkdownNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import { RadioButtonComponent } from '../radio-button/radio-button.component';
 
-storiesOf('Radio Button', module)
-    .add('Basic Unchecked', withMarkdownNotes(`
+const documentationBasic = `
 ### Radio button
 
 The \`mm-radio\` component represents a HTML radio button.
@@ -42,21 +40,32 @@ export class ContactFormComponent {
 | **value** | The value of the rendered datio button element | * ||
 | **required** | The required state of the rendered radio button element | true, false | false |
 | **label** | The label for the radio button element | * ||
-    `)(() => ({
+`;
+
+const documentationChecked = `
+### Radio button
+
+Radio button when checked.
+`;
+
+storiesOf('Radio Button', module)
+    .add('Basic Unchecked', () => ({
         component: RadioButtonComponent,
         props: {
             label: 'Radio Button Label'
         },
-    })))
-    .add('Checked', withMarkdownNotes(`
-### Radio button
-
-Radio button when checked.
-    `)(() => ({
+    }),
+    { notes: {
+        markdown: documentationBasic
+    }})
+    .add('Checked', () => ({
         component: RadioButtonComponent,
         props: {
             checked: 'checked',
             label: 'Radio Button Label',
             required: true
         },
-    })));
+    }),
+    { notes: {
+        markdown: documentationChecked
+    }});

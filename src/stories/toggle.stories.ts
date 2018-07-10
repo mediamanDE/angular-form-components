@@ -1,11 +1,9 @@
 import { storiesOf } from '@storybook/angular';
-import { withMarkdownNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import { ToggleComponent } from '../toggle/toggle.component';
 
-storiesOf('Toggle', module)
-    .add('Basic', withMarkdownNotes(`
+const documentation = `
 ### Toggle
 
 The \`mm-toggle\` component represents a simple toggle element with a hidden checkbox used to store the state.
@@ -36,9 +34,15 @@ export class ContactFormComponent {
 | **id** | The id of the rendered toggle element | * ||
 | **required** | The required state of the rendered toggle element | true, false | false |
 | **label** | The label for the toggle element | * ||
-    `)(() => ({
+`;
+
+storiesOf('Toggle', module)
+    .add('Basic', () => ({
         component: ToggleComponent,
         props: {
             propagateChange: (model) => { action('model')(model); }
         },
-    })));
+    }),
+    { notes: {
+        markdown: documentation
+    }});

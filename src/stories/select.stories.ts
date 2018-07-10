@@ -1,11 +1,9 @@
 import { storiesOf } from '@storybook/angular';
-import { withMarkdownNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import { SelectComponent } from '../select/select.component';
 
-storiesOf('Select', module)
-    .add('Basic', withMarkdownNotes(`
+const documentation = `
 ### Select
 
 The \`mm-select\` component represents a HTML select field.
@@ -51,10 +49,16 @@ export class ContactFormComponent {
 | **options** | The select elements options | SelectOptionInterface[] | [] |
 | **required** | The required state of the rendered select element | true, false | false |
 | **label** | The label for the select element | * ||
-    `)(() => ({
+`;
+
+storiesOf('Select', module)
+    .add('Basic', () => ({
         component: SelectComponent,
         props: {
             label: 'Select Label',
             options: [{ value: '1', label: 'option 1'}, { value: '2', label: 'option 2'}]
         },
-    })));
+    }),
+    { notes: {
+        markdown: documentation
+    }});

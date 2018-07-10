@@ -1,13 +1,10 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { withMarkdownNotes } from '@storybook/addon-notes';
 import { action } from '@storybook/addon-actions';
 
 import { InputComponent } from '../input/input.component';
 import { NgForm } from '@angular/forms';
 
-storiesOf('Input', module)
-    .addDecorator(moduleMetadata({providers: [NgForm]}))
-    .add('Basic', withMarkdownNotes(`
+const documentation = `
 ### Input field
 
 The \`mm-input\` component can represent all HTML input fields where a value can be entered.
@@ -38,10 +35,17 @@ export class ContactFormComponent {
 | **required** | The required state of the rendered input element | true, false | false |
 | **pattern** | Regular expression the value is checked against. Type must be text, search, tel, url, email, or password | true, false ||
 | **label** | The label for the input element | * ||
-    `)(() => ({
+`;
+
+storiesOf('Input', module)
+    .addDecorator(moduleMetadata({providers: [NgForm]}))
+    .add('Basic', () => ({
         component: InputComponent,
         props: {
             label: 'Text Input Label',
             errorMessage: 'This is an error message'
         },
-    })));
+    }),
+    { notes: {
+        markdown: documentation
+    }});
