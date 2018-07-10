@@ -38,5 +38,7 @@ export class ContactFormComponent {
 | **label** | The label for the toggle element | * ||
     `)(() => ({
         component: ToggleComponent,
-        props: {},
+        props: {
+            propagateChange: (model) => { action('model')(model); }
+        },
     })));
