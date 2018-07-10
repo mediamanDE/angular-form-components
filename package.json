@@ -33,9 +33,7 @@
     ],
     "license": "MIT",
     "dependencies": {
-        "@angular-devkit/core": "^0.6.8",
         "@angular/forms": "^6.0.3",
-        "@mediaman/storybook-to-json": "^0.1.0",
         "tslib": "^1.7.1"
     },
     "peerDependencies": {
@@ -51,7 +49,9 @@
         "@angular/platform-browser": "^6.0.3",
         "@angular/platform-browser-dynamic": "^6.0.3",
         "@angular/platform-server": "^6.0.3",
+        "@angular-devkit/core": "^0.6.8",
         "@compodoc/compodoc": "1.0.3",
+        "@mediaman/storybook-to-json": "^0.1.0",
         "@storybook/addon-actions": "^4.0.0-alpha.10",
         "@storybook/addon-notes": "^4.0.0-alpha.10",
         "@storybook/addon-options": "^3.4.8",
