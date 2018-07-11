@@ -31,6 +31,7 @@ export abstract class AbstractFormControl implements OnInit {
             this.control = ((this.controlContainer as NgForm).controls.value as FormGroup)
                 .get(this.name) as AbstractControl;
             this.control.valueChanges.subscribe(() => this.changeDetectorRef.markForCheck());
+            this.changeDetectorRef.markForCheck();
         });
     }
 }
