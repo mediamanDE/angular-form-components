@@ -43,6 +43,9 @@ export class AppModule {
 
 ## Components
 
+We've also added a [demo](https://mediamande.github.io/angular-form-components/index.html) of the 
+unstyled components with their respective documentation.
+
 ### Input field
 
 The `mm-input` component can represent all HTML input fields where a value can be entered.
@@ -122,9 +125,9 @@ export class ContactFormComponent {
 
 ### Radio button
 
-The `mm-radio` component represents a HTML radio button.
+The `mm-radio-button` component represents a HTML radio button.
 
-The `mm-radio` component should be used, if possible, in combination with the `mm-radio-group` component.
+The `mm-radio-button` component should be used, if possible, in combination with the `mm-radio-button-group` component.
 
 ```javascript
 import { Component } from '@angular/core';
