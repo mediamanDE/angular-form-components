@@ -123,4 +123,16 @@ describe('InputComponent', () => {
             });
         });
     });
+
+    describe('::onFocus', () => {
+        it('should mark the input as touched for the parent form', () => {
+            const event = new Event('focus');
+
+            spyOn(component.focused, 'emit');
+
+            component.onFocus(event);
+
+            expect(component.focused.emit).toHaveBeenCalledWith(event);
+        });
+    });
 });

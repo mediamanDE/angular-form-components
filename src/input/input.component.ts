@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import {
     AbstractControl,
     ControlContainer,
@@ -26,6 +26,7 @@ import { AbstractFormControl } from '../abtract-form-control';
                    [pattern]="pattern"
                    (change)="onChange()"
                    (blur)="onBlur()"
+                   (focus)="onFocus()"
                    class="mm-input__field"
                    #input>
             <span class="mm-input__error"
@@ -47,6 +48,11 @@ import { AbstractFormControl } from '../abtract-form-control';
     viewProviders: [{provide: ControlContainer, useExisting: NgForm}]
 })
 export class InputComponent extends AbstractFormControl implements ControlValueAccessor, Validator {
+
+    /**
+     * Emit when the input element gains focus
+     */
+    @Output() public focused: EventEmitter<Event> = new EventEmitter<Event>();
 
     /**
      * The input name
@@ -164,5 +170,14 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
      */
     public focus() {
         (this.inputElement.nativeElement as HTMLInputElement).focus();
+    }
+
+    /**
+     * Propagate the focus event to the parent form
+     *
+     * @param e
+     */
+    public onFocus(e: Event) {
+        this.focused.emit(e);
     }
 }

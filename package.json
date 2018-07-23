@@ -1,6 +1,6 @@
 {
     "name": "@mediaman/angular-form-components",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "Angular library of common, un-styled form components.",
     "main": "./bundles/angular-form-components.umd.js",
     "module": "./esm5/angular-form-components.js",
