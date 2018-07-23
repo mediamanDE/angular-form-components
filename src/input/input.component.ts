@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, forwardRef, Input, ViewChild } from '@angular/core';
 import {
     AbstractControl,
     ControlContainer,
@@ -15,7 +15,8 @@ import { AbstractFormControl } from '../abtract-form-control';
 @Component({
     selector: 'mm-input',
     template: `
-        <div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}" ngModelGroup="value">
+        <div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}"
+             ngModelGroup="value">
             <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
             <input [type]="type"
                    [name]="name"
@@ -25,7 +26,8 @@ import { AbstractFormControl } from '../abtract-form-control';
                    [pattern]="pattern"
                    (change)="onChange()"
                    (blur)="onBlur()"
-                   class="mm-input__field">
+                   class="mm-input__field"
+                   #input>
             <span class="mm-input__error"
                   *ngIf="control && control.touched && !control.valid"
                   [innerHTML]="errorMessage"></span>
@@ -103,6 +105,11 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
     @ViewChild(NgModel) private inputModel: NgModel;
 
     /**
+     * The input element
+     */
+    @ViewChild('input') private inputElement: ElementRef;
+
+    /**
      * @inheritDoc
      */
     public writeValue(value: string | number) {
@@ -150,5 +157,12 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
         if (this.propagateTouched) {
             this.propagateTouched();
         }
+    }
+
+    /**
+     * Bring focus to the input element
+     */
+    public focus() {
+        (this.inputElement.nativeElement as HTMLInputElement).focus();
     }
 }

@@ -107,4 +107,20 @@ describe('InputComponent', () => {
             expect(propagateTouchedFn).not.toHaveBeenCalled();
         });
     });
+
+    describe('::focus', () => {
+        it('should bring focus to the input element', (done) => {
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                const inputElement = fixture.debugElement.query(By.css('input'));
+                spyOn(inputElement.nativeElement, 'focus');
+
+                component.focus();
+
+                expect(inputElement.nativeElement.focus).toHaveBeenCalled();
+
+                done();
+            });
+        });
+    });
 });
