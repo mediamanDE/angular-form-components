@@ -26,7 +26,7 @@ import { AbstractFormControl } from '../abtract-form-control';
                    [pattern]="pattern"
                    (change)="onChange()"
                    (blur)="onBlur()"
-                   (focus)="onFocus()"
+                   (focus)="onFocus($event)"
                    class="mm-input__field"
                    #input>
             <span class="mm-input__error"
