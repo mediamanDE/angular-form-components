@@ -32,6 +32,7 @@ import { AbstractFormControl } from '../abtract-form-control';
             <span class="mm-input__error"
                   *ngIf="control && control.touched && !control.valid"
                   [innerHTML]="errorMessage"></span>
+            <span *ngIf="hint" class="mm-input__hint" [innerHTML]="hint"></span>
         </div>`,
     providers: [
         {
@@ -89,6 +90,11 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
      * The inputs error message
      */
     @Input() public errorMessage: string = 'Bitte überprüfen Sie Ihre Eingabe.';
+
+    /**
+     * The inputs hint text
+     */
+    @Input() public hint: string;
 
     /**
      * The input value
