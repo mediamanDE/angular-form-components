@@ -22,6 +22,7 @@ import { AbstractFormControl } from '../abtract-form-control';
                    [name]="name"
                    [id]="id"
                    [(ngModel)]="value"
+                   [placeholder]="placeholder"
                    [required]="required"
                    [pattern]="pattern"
                    (change)="onChange()"
@@ -95,6 +96,11 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
      * The inputs hint text
      */
     @Input() public hint: string;
+
+    /**
+     * The inputs placeholder text
+     */
+    @Input() public placeholder: string;
 
     /**
      * The input value
