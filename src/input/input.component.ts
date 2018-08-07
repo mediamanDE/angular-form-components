@@ -15,7 +15,11 @@ import { AbstractFormControl } from '../abtract-form-control';
 @Component({
     selector: 'mm-input',
     template: `
-        <div [ngClass]="{'mm-input': true, 'mm-input--invalid': (control && control.touched && !control.valid)}"
+        <div [ngClass]="{
+                'mm-input': true, 
+                'mm-input--invalid': (control && control.touched && !control.valid), 
+                'mm-input--disabled': disabled
+            }"
              ngModelGroup="value">
             <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
             <input [type]="type"
@@ -24,6 +28,7 @@ import { AbstractFormControl } from '../abtract-form-control';
                    [(ngModel)]="value"
                    [placeholder]="placeholder"
                    [required]="required"
+                   [disabled]="disabled"
                    [pattern]="pattern"
                    (change)="onChange()"
                    (blur)="onBlur()"
@@ -75,6 +80,11 @@ export class InputComponent extends AbstractFormControl implements ControlValueA
      * The inputs required state
      */
     @Input() public required: boolean = false;
+
+    /**
+     * Flag to set the input component to disabled
+     */
+    @Input() public disabled: boolean = false;
 
     /**
      * Regex for the input validation
