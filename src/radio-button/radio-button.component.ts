@@ -176,7 +176,7 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor, Valid
      */
     public onChange() {
         if (this.radioButtonGroup) {
-            this.radioButtonGroup.value = this.value;
+            this.radioButtonGroup.writeValue(this.value);
         }
 
         if (!this.propagateChange) {
