@@ -1,11 +1,11 @@
-import { Component, QueryList, ContentChildren, Input, forwardRef } from '@angular/core';
+import { Component, ContentChildren, forwardRef, Input, QueryList } from '@angular/core';
 import {
-    Validator,
     AbstractControl,
-    ValidationErrors,
     ControlValueAccessor,
+    NG_VALIDATORS,
     NG_VALUE_ACCESSOR,
-    NG_VALIDATORS
+    ValidationErrors,
+    Validator
 } from '@angular/forms';
 import { RadioButtonComponent } from './radio-button.component';
 
@@ -14,7 +14,8 @@ import { RadioButtonComponent } from './radio-button.component';
     template: `
         <div [ngClass]="{
                 'mm-radiobutton-group': true, 
-                'mm-radiobutton-group--invalid': validate() 
+                'mm-radiobutton-group--invalid': validate(), 
+                'mm-radiobutton-group--disabled': disabled
             }">
             <ng-content></ng-content>
 
@@ -66,6 +67,11 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
      * The radio button groups hint text
      */
     @Input() public hint: string;
+
+    /**
+     * Flag to set the radio button group component to disabled
+     */
+    @Input() public disabled: boolean = false;
 
     /**
      * All radio button children
@@ -143,7 +149,7 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
     /**
      * @inheritDoc
      */
-    public validate(c?: AbstractControl): ValidationErrors|any {
+    public validate(c?: AbstractControl): ValidationErrors | any {
         if (!this.required) {
             return;
         }
