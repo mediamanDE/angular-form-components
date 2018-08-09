@@ -150,6 +150,7 @@ describe('RadioButtonGroupComponent', () => {
 
     describe('::validate', () => {
         it('should return a required error if no radio button is selected', () => {
+            component.required = true;
             radioButtons[0].checked = false;
             radioButtons[1].checked = false;
 
@@ -158,7 +159,8 @@ describe('RadioButtonGroupComponent', () => {
             expect(errors).toEqual({required: true});
         });
 
-        it('should not return a required error if no radio button is selected', () => {
+        it('should not return a required error if a radio button is selected', () => {
+            component.required = true;
             radioButtons[0].checked = true;
 
             const errors = component.validate(new FormControl());
@@ -167,7 +169,18 @@ describe('RadioButtonGroupComponent', () => {
         });
 
         it('should not return an error if there are no child radio buttons', () => {
+            component.required = true;
             Object.defineProperty(component, 'radioButtons', {value: null});
+
+            const errors = component.validate(new FormControl());
+
+            expect(errors).toBeUndefined();
+        });
+
+        it('should not return an error if the component is not required', () => {
+            component.required = false;
+            radioButtons[0].checked = false;
+            radioButtons[1].checked = false;
 
             const errors = component.validate(new FormControl());
 

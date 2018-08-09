@@ -19,7 +19,7 @@ describe('RadioButtonComponent', () => {
         TestBed.configureTestingModule({
             declarations: [RadioButtonComponent],
             imports: [FormsModule],
-            providers: [{provide: RadioButtonGroupComponent, useValue: {}}]
+            providers: [{provide: RadioButtonGroupComponent, useValue: {writeValue: () => null}}]
         });
     });
     
@@ -128,12 +128,14 @@ describe('RadioButtonComponent', () => {
 
     describe('::onChange', () => {
         it('should update the parent radio button groups value', () => {
+            spyOn(radioButtonGroupComponent, 'writeValue');
+
             const newValue = 'foo';
 
             component.value = newValue;
             component.onChange();
 
-            expect(radioButtonGroupComponent.value).toBe(newValue);
+            expect(radioButtonGroupComponent.writeValue).toHaveBeenCalledWith(newValue);
         });
 
         it('should not update the parent radio button groups value if it does not exist', () => {

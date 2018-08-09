@@ -11,7 +11,17 @@ import { RadioButtonComponent } from './radio-button.component';
 
 @Component({
     selector: 'mm-radio-button-group',
-    template: `<div class="mm-radiobutton-group"><ng-content></ng-content></div>`,
+    template: `
+        <div [ngClass]="{
+                'mm-radiobutton-group': true, 
+                'mm-radiobutton-group--invalid': validate() 
+            }">
+            <ng-content></ng-content>
+
+            <span class="mm-radio-button__error"
+                  *ngIf="validate()"
+                  [innerHTML]="errorMessage"></span>
+        </div>`,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -72,6 +82,11 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
     }
 
     /**
+     * The inputs error message
+     */
+    @Input() public errorMessage: string = 'Bitte überprüfen Sie Ihre Eingabe.';
+
+    /**
      * The internal name property
      * Gets read and set by TS getter/setters
      */
@@ -121,7 +136,11 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
     /**
      * @inheritDoc
      */
-    public validate(c: AbstractControl): ValidationErrors|any {
+    public validate(c?: AbstractControl): ValidationErrors|any {
+        if (!this.required) {
+            return;
+        }
+
         if (!this.radioButtons) {
             return undefined;
         }
