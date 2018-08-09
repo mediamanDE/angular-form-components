@@ -38,7 +38,7 @@ import { AbstractFormControl } from '../abtract-form-control';
             <span class="mm-input__error"
                   *ngIf="control && control.touched && !control.valid"
                   [innerHTML]="errorMessage"></span>
-            <span *ngIf="hint" class="mm-input__hint" [innerHTML]="hint"></span>
+            <span *ngIf="hint" class="mm-form-hint mm-input__hint" [innerHTML]="hint"></span>
         </div>`,
     providers: [
         {
