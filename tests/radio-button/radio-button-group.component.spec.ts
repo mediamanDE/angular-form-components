@@ -159,7 +159,7 @@ describe('RadioButtonGroupComponent', () => {
             expect(errors).toEqual({required: true});
         });
 
-        it('should not return a required error if no radio button is selected', () => {
+        it('should not return a required error if a radio button is selected', () => {
             component.required = true;
             radioButtons[0].checked = true;
 
