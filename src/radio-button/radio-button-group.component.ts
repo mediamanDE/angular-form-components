@@ -22,6 +22,8 @@ import { RadioButtonComponent } from './radio-button.component';
             <span class="mm-radio-button__error"
                   *ngIf="validate()"
                   [innerHTML]="errorMessage"></span>
+
+            <span *ngIf="hint" class="mm-form-hint mm-radio-button__hint" [innerHTML]="hint"></span>
         </div>`,
     providers: [
         {
@@ -60,6 +62,11 @@ export class RadioButtonGroupComponent implements Validator, ControlValueAccesso
             this.radioButtons.forEach((radioButton: RadioButtonComponent) => radioButton.name = this._name);
         }
     }
+
+    /**
+     * The radio button groups hint text
+     */
+    @Input() public hint: string;
 
     /**
      * Flag to set the radio button group component to disabled
