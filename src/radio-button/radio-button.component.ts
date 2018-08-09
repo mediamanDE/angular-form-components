@@ -17,6 +17,7 @@ import { RadioButtonGroupComponent } from './radio-button-group.component';
             <input [type]="'radio'"
                    [attr.name]="name"
                    [id]="id"
+                   [disabled]="disabled"
                    [value]="value"
                    [(ngModel)]="model"
                    [checked]="checked"
@@ -50,6 +51,11 @@ export class RadioButtonComponent implements OnInit, ControlValueAccessor, Valid
      * The radio buttons id
      */
     @Input() public id: string;
+
+    /**
+     * Flag to set the radio button component to disabled
+     */
+    @Input() public disabled: boolean = false;
 
     /**
      * The radio buttons value
