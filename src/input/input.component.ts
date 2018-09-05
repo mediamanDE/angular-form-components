@@ -21,7 +21,7 @@ import { AbstractFormControl } from '../abtract-form-control';
                 'mm-input--disabled': disabled
             }"
              ngModelGroup="value">
-            <label [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
+            <label *ngIf="label" [for]="name" class="mm-label mm-input__label" [innerHTML]="label"></label>
             <input [type]="type"
                    [name]="name"
                    [id]="id"
