@@ -10,6 +10,7 @@ import { XsrfAppLoadService } from './csrf/xsrf-app-load.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { XsrfInterceptor } from './csrf/xsrf.interceptor';
 import { HttpClientModule } from '@angular/common/http';
+import { CheckBoxComponent } from './checkbox/checkbox.component';
 
 let xsrfApiUrl: string;
 
@@ -28,7 +29,8 @@ export function initApp(appLoadService: XsrfAppLoadService) {
         SelectComponent,
         RadioButtonComponent,
         RadioButtonGroupComponent,
-        ToggleComponent
+        ToggleComponent,
+        CheckBoxComponent
     ],
     imports: [
         FormsModule,
@@ -40,7 +42,8 @@ export function initApp(appLoadService: XsrfAppLoadService) {
         SelectComponent,
         RadioButtonComponent,
         RadioButtonGroupComponent,
-        ToggleComponent
+        ToggleComponent,
+        CheckBoxComponent
     ],
     providers: [NgForm]
 })

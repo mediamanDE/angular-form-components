@@ -152,6 +152,32 @@ export class ContactFormComponent {
 }
 ```
 
+### Checkbox
+
+The `mm-checkbox` component represents a HTML checkbox.
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+    selector: 'contact-form',
+    template: `
+        <mm-checkbox [id]="'newsletterDoc'"
+            [label]="'I want to get the newsletter'"
+            [checked]="newsletterDoc"
+            (change)="newsletterDoc = !newsletterDoc"></mm-checkbox>
+        <mm-checkbox [id]="'emailDoc'"
+            [label]="'It is okay for me to get contacted via email'"
+            [checked]="emailDoc"
+            (change)="emailDoc = !emailDoc"></mm-checkbox>
+    `
+})
+export class ContactFormComponent {
+    public newsletterDoc: boolean;
+    public emailDoc: boolean;
+}
+```
+
 #### Properties
 
 | **name** | description | possible values | default value |
